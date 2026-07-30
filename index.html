@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMC View Painting | AMC View Painting & Decoration</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #121820;
+            --accent: #C5A059; /* Luxury Gold Tone */
+            --accent-hover: #e0b86c;
+            --bg-dark: #0A0D12;
+            --bg-card: #18202A;
+            --text-main: #F1F5F9;
+            --text-muted: #94A3B8;
+            --border-glow: rgba(197, 160, 89, 0.2);
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .brand-text {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.5px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* --- HEADER & NAV --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 13, 18, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo img {
+            height: 48px;
+            width: auto;
+            border-radius: 6px;
+            border: 1px solid var(--accent);
+        }
+
+        .brand-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #fff;
+            background: linear-gradient(135deg, #FFF 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-main);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--accent);
+            cursor: pointer;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 2rem 60px;
+            background: linear-gradient(180deg, rgba(10, 13, 18, 0.4) 0%, var(--bg-dark) 100%),
+                        url('https://amcviewpainting.com/wp-content/uploads/2024/07/IMG_0281-2048x1536.jpg') center/cover no-repeat fixed;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(10,13,18,0.6) 0%, rgba(10,13,18,0.95) 100%);
+        }
+
+        .hero-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+        }
+
+        .hero-content h1 span {
+            color: var(--accent);
+        }
+
+        .hero-content p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--accent) 0%, #9A7B3E 100%);
+            color: #000;
+            font-weight: 700;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(197, 160, 89, 0.3);
+            transition: var(--transition);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(197, 160, 89, 0.5);
+            background: linear-gradient(135deg, var(--accent-hover) 0%, var(--accent) 100%);
+        }
+
+        .hero-card {
+            background: rgba(24, 32, 42, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glow);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .hero-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* --- STATS SECTION --- */
+        .stats-section {
+            background: var(--primary);
+            padding: 4rem 2rem;
+            border-y: 1px solid var(--border-glow);
+        }
+
+        .stats-grid {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent);
+            font-family: 'Cinzel', serif;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- ABOUT US SECTION --- */
+        .about-section {
+            padding: 6rem 2rem;
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+
+        .about-text p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .about-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--accent);
+            font-weight: 600;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 4px;
+            transition: var(--transition);
+        }
+
+        .about-link-btn:hover {
+            color: #fff;
+            border-color: #fff;
+            transform: translateX(5px);
+        }
+
+        /* --- SERVICES SECTION --- */
+        .services-section {
+            padding: 6rem 2rem;
+            background: var(--bg-dark);
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+        }
+
+        .service-img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .service-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .service-content h3 {
+            font-size: 1.35rem;
+            color: #fff;
+            margin-bottom: 0.75rem;
+        }
+
+        .service-content p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .services-cta-box {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .explore-btn {
+            padding: 0.85rem 2rem;
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            border-radius: 30px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .explore-btn:hover {
+            background: var(--accent);
+            color: #000;
+            box-shadow: 0 5px 15px rgba(197, 160, 89, 0.3);
+        }
+
+        /* --- REVIEWS SECTION --- */
+        .reviews-section {
+            padding: 6rem 2rem;
+            background: var(--primary);
+        }
+
+        .reviews-container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .review-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+        }
+
+        .stars {
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .review-card p {
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        .client-name {
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* --- FAQ SECTION --- */
+        .faq-section {
+            padding: 6rem 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--bg-card);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255,255,255,0.05);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.25rem 1.5rem;
+            max-height: 200px;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+            color: var(--accent);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #05070A;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding: 5rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .footer-links h4, .footer-contact h4 {
+            color: #fff;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .footer-contact p {
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .footer-contact i {
+            color: var(--accent);
+            margin-top: 4px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 992px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-content p {
+                margin: 0 auto 2rem;
+            }
+            .about-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .mobile-toggle {
+                display: block;
+            }
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER / NAVIGATION -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="brand-logo">
+                <img src="https://amcviewpainting.com/wp-content/uploads/2024/07/FB_IMG_1554388610258-e1720129694273.jpg" alt="AMC View Painting Logo">
+                <span class="brand-text">AMC View Painting</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+            <div class="mobile-toggle">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Transforming Spaces into <span>Inspiring Environments</span></h1>
+                <p>At AMC View Painting, we don't just improve spaces — we elevate them. Delivering precision interior/exterior painting and premium flooring workmanship tailored to your lifestyle.</p>
+                <a href="https://amcviewpainting.com/" class="cta-btn"></i> Visit Website</a>
+            </div>
+            <div class="hero-card">
+                <img src="https://amcviewpainting.com/wp-content/uploads/2024/07/20220829_165010-610x458-1.webp" alt="High Quality Painting Showcase">
+                <h3>Craftsmanship & Quality</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Providing Layton, UT and surrounding areas with superior painting and flooring solutions.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- LUXURY STATS COUNTER SECTION -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" data-target="1500">0</div>
+                <div class="stat-label">Satisfied Customers</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" data-target="1800">0</div>
+                <div class="stat-label">Total Projects</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" data-target="100">0</div>
+                <div class="stat-label">% Quality Guarantee</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT US SECTION -->
+    <section class="about-section" id="about">
+        <div>
+            <img src="https://amcviewpainting.com/wp-content/uploads/2024/07/IMG_0281-2048x1536.jpg" alt="AMC View Painting Team at work" style="width: 100%; border-radius: 16px; border: 1px solid var(--border-glow);">
+        </div>
+        <div class="about-text">
+            <h2>About AMC View Painting</h2>
+            <p>At AMC View Painting, we do not improve spaces, we turn them into environments that inspire and upgrade your everyday life. Our process starts with understanding your requirements, guaranteeing that every project reflects your unique style and needs.</p>
+            <p>Whether you want to upgrade your floors or completely refresh the paint in your interior or exterior, our experienced team is committed to providing quality workmanship that boosts the look and value of your space at the same time.</p>
+            <a href="https://amcviewpainting.com/about-us/" class="about-link-btn" target="_blank" rel="noopener">Learn More About Us <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section class="services-section" id="services">
+        <div class="section-header">
+            <h2>Our Specialized Services</h2>
+            <p>Tailored painting and flooring applications crafted to withstand time and elevate aesthetics.</p>
+        </div>
+
+        <div class="services-grid">
+            <!-- Service 1 -->
+            <div class="service-card">
+                <img src="https://amcviewpainting.com/wp-content/uploads/2024/07/IMG_0281-2048x1536.jpg" alt="Flooring Service" class="service-img">
+                <div class="service-content">
+                    <h3>Flooring</h3>
+                    <p>High-durability flooring solutions designed to enhance both functional resilience and indoor luxury appearance.</p>
+                </div>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="service-card">
+                <img src="https://amcviewpainting.com/wp-content/uploads/2024/07/20220829_165010-610x458-1.webp" alt="Painting Service" class="service-img">
+                <div class="service-content">
+                    <h3>Painting</h3>
+                    <p>Flawless interior and exterior painting services executed with precision finish, prep, and premium paint lines.</p>
+                </div>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="service-card">
+                <img src="https://ru-smola.com/images/lib37.jpg" alt="Floor Coatings" class="service-img">
+                <div class="service-content">
+                    <h3>Floor Coatings</h3>
+                    <p>Heavy-duty chemical and wear-resistant epoxy coatings suited for residential garages and commercial floors.</p>
+                </div>
+            </div>
+
+            <!-- Service 4 -->
+            <div class="service-card">
+                <img src="https://avatars.mds.yandex.net/i?id=1654fa9c54e011941ff8a76748da03a395b654b5-5662815-images-thumbs&n=13" alt="Exterior Staining" class="service-img">
+                <div class="service-content">
+                    <h3>Exterior Staining</h3>
+                    <p>Weatherproofing deck and timber staining engineered to defend wood against intense elements and sun wear.</p>
+                </div>
+            </div>
+
+            <!-- Service 5 -->
+            <div class="service-card">
+                <img src="https://avatars.mds.yandex.net/i?id=43756be436e1ed4b110baf7addb81792102d71c1-4727286-images-thumbs&n=13" alt="Paint Removal" class="service-img">
+                <div class="service-content">
+                    <h3>Paint Removal</h3>
+                    <p>Safe, surface-conscious stripping of aged paint layers to cleanly reset surfaces for flawless re-application.</p>
+                </div>
+            </div>
+
+            <!-- Service 6 -->
+            <div class="service-card">
+                <img src="https://www.kitchencabinetrefacingaz.com/wp-content/uploads/2019/08/20190417_122610.jpg" alt="Cabinet Refinishing" class="service-img">
+                <div class="service-content">
+                    <h3>Cabinet Refinishing</h3>
+                    <p>Factory-grade cabinet painting and staining that revitalizes kitchens without complete replacement costs.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- EXPLORE SERVICES BUTTONS -->
+        <div class="services-cta-box">
+            <a href="https://amcviewpainting.com/painting/" class="explore-btn" target="_blank" rel="noopener"><i class="fa-solid fa-paint-roller"></i> Explore Painting Services</a>
+            <a href="https://amcviewpainting.com/flooring/" class="explore-btn" target="_blank" rel="noopener"><i class="fa-solid fa-layer-group"></i> Explore Flooring Services</a>
+        </div>
+    </section>
+
+    <!-- CUSTOMER REVIEWS -->
+    <section class="reviews-section">
+        <div class="reviews-container">
+            <div class="section-header">
+                <h2>Client Testimonials</h2>
+                <p>Read what our valued customers say about our attention to detail and clean work ethic.</p>
+            </div>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p>"AMC View Painting completely transformed our living space. The paint trim edges are immaculate and they left everything spotless every evening!"</p>
+                    <div class="client-name">David M. — Layton, UT</div>
+                </div>
+                <div class="review-card">
+                    <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p>"Our new floor coating looks better than showroom quality. Highly recommended if you want transparent pricing and professional execution."</p>
+                    <div class="client-name">Sarah K. — Utah</div>
+                </div>
+                <div class="review-card">
+                    <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p>"Cabinet refinishing saved us thousands over replacement. The finish feels smooth and factory-baked. Exceptional craftsmanship!"</p>
+                    <div class="client-name">Jason L. — Utah</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQS SECTION -->
+    <section class="faq-section">
+        <div class="section-header">
+            <h2>Frequently Asked Questions</h2>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>How do I get an estimate for my project?</span>
+                <i class="fa-solid fa-chevron-down faq-toggle"></i>
+            </div>
+            <div class="faq-answer">
+                You can reach us directly via phone at (801) 330-6352 or visit our website to schedule an in-person estimate consultation.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>What areas do you serve?</span>
+                <i class="fa-solid fa-chevron-down faq-toggle"></i>
+            </div>
+            <div class="faq-answer">
+                We are based in Layton, UT (84015) and proudly serve the surrounding communities with high-end painting and flooring solutions.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Are Saturday appointments available?</span>
+                <i class="fa-solid fa-chevron-down faq-toggle"></i>
+            </div>
+            <div class="faq-answer">
+                Yes, Saturday service is available by appointment only to suit your busy schedule.
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="brand-logo">
+                    <img src="https://amcviewpainting.com/wp-content/uploads/2024/07/FB_IMG_1554388610258-e1720129694273.jpg" alt="Logo">
+                    <span class="brand-text">AMC View Painting</span>
+                </div>
+                <p>Upgrading everyday life by turning spaces into inspired environments through premium paint and flooring craftsmanship.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-contact">
+                <h4>Contact Information</h4>
+                <p><i class="fa-solid fa-location-dot"></i> Layton, UT 84015</p>
+                <p><i class="fa-solid fa-phone"></i> (801) 330-6352</p>
+                <p><i class="fa-solid fa-envelope"></i> Contact via website</p>
+                <p><i class="fa-solid fa-clock"></i> Mon - Fri: 7:30AM - 6:00PM<br>Sat: Appointment Only<br>Sun: Closed</p>
+            </div>
+        </div>
+
+        <div class="copyright">
+            © 2026 The Ranking Geeks. All Rights Reserved.
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE SCRIPT -->
+    <script>
+        // FAQ Accordion Interaction
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                const parent = item.parentElement;
+                parent.classList.toggle('active');
+            });
+        });
+
+        // Dynamic Counters Animation
+        const counters = document.querySelectorAll('.stat-number');
+        let animated = false;
+
+        window.addEventListener('scroll', () => {
+            const scrollPos = window.scrollY + window.innerHeight;
+            const sectionPos = document.querySelector('.stats-section').offsetTop;
+
+            if (scrollPos > sectionPos && !animated) {
+                counters.forEach(counter => {
+                    const target = +counter.getAttribute('data-target');
+                    const duration = 2000;
+                    const step = target / (duration / 16);
+                    let current = 0;
+
+                    const updateCount = () => {
+                        current += step;
+                        if (current < target) {
+                            counter.innerText = Math.ceil(current) + "+";
+                            requestAnimationFrame(updateCount);
+                        } else {
+                            counter.innerText = target + "+";
+                        }
+                    };
+                    updateCount();
+                });
+                animated = true;
+            }
+        });
+    </script>
+</body>
+</html>
